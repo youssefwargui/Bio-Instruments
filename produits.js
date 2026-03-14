@@ -13,59 +13,82 @@ var produits = []
 //         pic : "https://clpmag.com/wp-content/uploads/2018/08/Abbott-Alinity-ci_crop1280x751p.jpg" , 
 //         desc : "Abbott's Alinity is a family of next-generation, high-throughput diagnostic systems designed to improve laboratory efficiency and simplify operations. Featuring a uniform interface, they cover immunoassay, chemistry, hematology, molecular, and blood screening, offering, for example, up to 1,550 tests per hour on the Alinity ci-series."
 //     }
-    
 // ]
 
 var ol = document.querySelector("ol")
-var input= document.querySelector("input")
+var input= document.getElementById("name")
 var button = document.getElementById("btn")
 var imginput =  document.getElementById("imgg")
 var descinput = document.getElementById("descinput")
+var inputsearch = document.getElementById("inputsearch")
+var btnsearch = document.getElementById("btnsearch")
 
 
 var divcard = document.getElementById("card-body")
 var cardtitle = document.getElementById("card-title")
 var cardtext = document.getElementById ("card-text")
 var cardimg = document.getElementById("card-img")
-// var produits = JSON.parse(localStorage.getItem("produits")) || []
+var produits = JSON.parse(localStorage.getItem("produits")) || []
 
 function afficheMachine() {
   ol.innerHTML = "";
+  
   produits.forEach((el) => {
     var li = document.createElement("li");
     var p = document.createElement("p");
     p.textContent = el.name;
-    // localStorage.setItem("produits" , JSON.stringify(produits))
-  ol.append(li)
-  li.append(p)
+   
+  
 
-  li.addEventListener("click" , function () {
-    // var div = document.createElement("div")
-    // var image = document.createElement("img")
-    // var h1 = document.createElement("h1")
+  p.addEventListener("click" , function () {
+    console.log(p);
     
-    
-
 cardtitle.textContent = el.name
 cardimg.src = el.pic
 cardtext.textContent = el.desc
-// div.append(image,h1)
-// document.body.append(div)
+
+document.body.append(divcard)
+
+
+
+
+  })
 var btndelete = document.createElement("button");
     btndelete.textContent = "delete";
     btndelete.onclick = () => {
       supprimer(el.id);
     };
 
+  var modifier = document.createElement("button")
+  modifier.textContent = "modifier"
+  modifier.onclick = () => {
+  var mdfN = document.createElement("input")
+  var mdfI = document.createElement("input")
+  var mdfD = document.createElement("input")
 
-li.append(btndelete)
-  })
+  var svg = document.createElement("button")
+  svg.textContent ="sauvgarde"
+  li.append(mdfN, mdfI , mdfD , svg)                          
+svg.onclick = () => {
+      modTache(el.id , mdfN.value , mdfI.value ,mdfD.value );
+}
+}
+li.append(btndelete , modifier)
+li.append(p)
+ol.append(li)
+  
   });
 }
 
 
 button.addEventListener("click" , function () {
     var autoId = crypto.randomUUID()
+         if (input.value === "") {
+        alert("Le champ est obligatoire")     
+         
+     }
+     console.log(input.value , imginput.value , descinput.value);
+     
     var product = {
         id : autoId , 
         name : input.value,
@@ -73,27 +96,18 @@ button.addEventListener("click" , function () {
         desc : descinput.value
     }
     produits.push(product)
-    // localStorage.setItem("produits" , JSON.stringify(produits))
+    localStorage.setItem("produits" , JSON.stringify(produits))
     
-    // produits.forEach(() => {
-    //     if (input.value === "") {
-    //     alert("Le champ est obligatoire")     NEQSA 
-    //     return false
-    // }
-    // return true 
-    // })
     
-
     input.value = ""
     imginput.value = ""
     descinput.value = ""
-
-
 
     afficheMachine()
     
 })
 
+afficheMachine()
 
 
 function supprimer(id) {
@@ -104,9 +118,47 @@ function supprimer(id) {
         }
     }
     produits = tab
+    localStorage.setItem("produits" , JSON.stringify(produits))
+    if (produits.length===0) {
+      divcard.innerHTML = ""
+    }
         afficheMachine()
 }
-supprimer()
+
+
+function modTache(id , name , img , ds ) {
+
+produits = produits.map((el) => {
+
+    if (el.id === id) {
+    return   el = {
+        id: el.id,
+        name: name? name:el.name ,                  
+        pic: img? img:el.pic,
+        desc: ds? ds:el.desc,
+      }}
+     return el
+ })
+ 
+  localStorage.setItem("produits" , JSON.stringify(produits))
+
+  afficheMachine();
+}
+
+btnsearch.addEventListener("click" , function (event) {
+  event.preventDefault()
+  var recherche = inputsearch.value
+  var result =  produits.filter(function(el) {
+    return el.name.toLowerCase().includes(recherche);
+  })
+ if (result.length){ 
+  produits=result
+  afficheMachine()
+}
+else(
+  afficheMachine()
+)
+})
 
 
 

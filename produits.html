@@ -9,9 +9,48 @@
     <title>Document</title>
 </head>
 <body>
+
+  <nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">
+      <img src="bioI.png" alt="Bio Instruments Logo" width="120" height="auto" class="d-inline-block align-text-top">
+    </a>
+    <nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <form class="d-flex" role="search">
+      <input id="inputsearch" class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+      <button id="btnsearch" class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+      Menu
+    </button>
+  </div>
+</nav>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Menu</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <nav class="navbar bg-body-tertiary">
+  
+    
+  
+</nav>
+  <div class="offcanvas-body">
+    <ul class="list-unstyled">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="produits.html">Products</a></li>
+      <li><a href="aboutUs.html">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</div>
     
   <ol></ol>
-  <input type="text" placeholder="name" >
+  <input id="name" type="text" placeholder="name" >
   <button id="btn">add</button>
   <input id="imgg" type="text" placeholder="image" >
   <input id="descinput" type="text" placeholder="description" >
@@ -20,9 +59,9 @@
   <div id="card-body">
     <h5 id="card-title"></h5>
     <p id="card-text"></p>
-    
+    <img src="" id="card-img" alt="">
   </div>
-  <img src="" id="card-img" alt="">
+  
 </div>
   
 

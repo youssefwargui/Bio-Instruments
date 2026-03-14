@@ -1,15 +1,16 @@
  body {
-      height: 100vh;
-      margin: 0;
-      background-size: cover;
-      background-position: center;
-      transition: background-image 1s ease-in-out; 
-    }
+   background-image: url(NF-400.jpg);
+   height: 100vh;
+   margin: 0;
+   background-size: cover;
+   background-position: center;
+   transition: background-image 1s ease-in-out;
+ }
 
-.navbar{
-    background-color: transparent !important;
-}
+ .navbar {
+   background-color: transparent !important;
+ }
 
-.header__search-trending{
-  display: none;
-}
+ .header__search-trending {
+   display: none;
+ }
